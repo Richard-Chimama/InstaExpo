@@ -32,6 +32,7 @@ const Feeds = () => {
   const token = credentials?.token;
   const [refreshing, setRefreshing] = useState(false)
   const [posts, setPosts ] = useState<any>(null)
+  const [modalVisible, setModalVisible] = useState(false);
 
   const { data, error, isPending, refetch} = useQuery({
     queryKey: ["posts"],
@@ -54,6 +55,12 @@ const Feeds = () => {
     .catch(()=>setRefreshing(false))  
   }
 
+  const handleModel = () => {
+    setModalVisible(!modalVisible);
+  };
+
+
+
 
   return (
     <S.Container style={{ flex: 1 }}>
@@ -67,6 +74,7 @@ const Feeds = () => {
               key={item.id}
               item={item}
               refetch={onRefresh}
+              showModal={handleModel}
             />
           )}
           estimatedItemSize={100}
@@ -75,7 +83,7 @@ const Feeds = () => {
         />
        
       )}
-      {true && <ModalComments />}
+      {modalVisible && <ModalComments showModal={handleModel} />}
     </S.Container>
   );
 };

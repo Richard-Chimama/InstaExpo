@@ -1,7 +1,12 @@
 import React from "react";
+import IonIcons from "@expo/vector-icons/Ionicons";
 import * as S from "./styled";
 
-const ModalComments = () => {
+interface props{
+      showModal: ()=> void
+}
+
+const ModalComments = (props: props) => {
   return (
     <S.Container
       transparent={true}
@@ -10,10 +15,14 @@ const ModalComments = () => {
       onRequestClose={() => false}
     >
       <S.Content>
+            <S.TouchableLayer onPress={props.showModal} />
         <S.SubContent>
-          <S.Word>ModalComments</S.Word>
+          <S.CommentSection>
+         
+            </S.CommentSection>
           <S.InputSection>
             <S.TextInput  placeholder="enter a comment" />
+            <IonIcons name="ios-send" size={40} color='blue' />
           </S.InputSection>
         </S.SubContent>
       </S.Content>

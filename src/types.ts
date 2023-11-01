@@ -22,6 +22,7 @@ export interface AppContextProps {
 export type postProps={
   item: postProp
   refetch?: ()=> void
+  showModal?: ()=> void
 }
 
 export interface postProp{

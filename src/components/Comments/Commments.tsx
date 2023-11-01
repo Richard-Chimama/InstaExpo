@@ -4,9 +4,10 @@ import * as S from "./styled";
 
 interface props{
       comments: any
+      onPress?: ()=> void
 }
 
-const Commments: React.FC<props> = ({comments}) => {
+const Commments: React.FC<props> = ({comments, onPress}) => {
       const [numLikes, setNumLikes] = useState(0);
     
       useEffect(() => {
@@ -17,7 +18,7 @@ const Commments: React.FC<props> = ({comments}) => {
         }
       }, []);
   return (
-    <S.Container>
+    <S.Container onPress={onPress}>
       <S.Info>{numLikes > 0 && numLikes}</S.Info>
       <IonIcons name="chatbubble-outline" size={25} />
     </S.Container>
