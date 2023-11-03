@@ -1,7 +1,7 @@
 import { postProp } from "../../types"
 
 interface prop{
-      data: []
+      data: any
 }
 
 const SortDataByTimeCreated = (d:prop)=>{

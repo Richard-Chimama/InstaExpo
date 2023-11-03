@@ -62,7 +62,7 @@ export const CredentialProvider= (s:CredentialProviderProps) => {
         }
         dispatch({ type: 'SET_LOADING', payload:{loading:false}}); 
       }catch(error){
-        console.log("Error while fetching loacalData", error);
+        console.log("Error while fetching localData", error);
       }
     }
 

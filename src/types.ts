@@ -22,7 +22,7 @@ export interface AppContextProps {
 export type postProps={
   item: postProp
   refetch?: ()=> void
-  showModal?: ()=> void
+  showModal?: (postId:string)=> void
 }
 
 export interface postProp{
@@ -32,6 +32,20 @@ export interface postProp{
   user_id: string,
   created_at: Date,
   comments: any,
-  likes: any,
+  comment?:any
+  likes: Likes[],
   id: string,
+}
+
+export interface commentProp{
+  id: string,
+  user_id: string,
+  comment: string,
+  created_at:Date,
+  updated_at: Date
+}
+
+export interface Likes {
+  id: string,
+  user_id: string
 }

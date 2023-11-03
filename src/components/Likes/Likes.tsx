@@ -3,34 +3,38 @@ import { View, Text } from "react-native";
 import IonIcons from "@expo/vector-icons/Ionicons";
 import * as S from "./styled";
 import { apiEndPoint, useAppContext } from "../../auth";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../ReduxStore";
+import { updateLike } from "../../ReduxStore/PostStore";
 
 interface propLike {
-  likes: any;
   postId: string;
-  refetch?: () => void;
 }
 
-const Likes: React.FC<propLike> = ({ likes, postId, refetch }) => {
+const Likes: React.FC<propLike> = ({ postId }) => {
   const { state } = useAppContext();
+  const posts = useSelector((state:RootState)=> state.posts)
+  const dispatch = useDispatch()
   const [numLikes, setNumLikes] = useState(0);
   const [isLike, setIsLike] = useState(false);
 
+  const post = posts.value.find((item)=> item.id === postId)
+
   useEffect(() => {
-    if (likes.length > 0) {
-      setNumLikes(likes.length);
+    if (post && post.likes.length > 0) {
+      setNumLikes(post.likes.length);
     } else {
       setNumLikes(0);
     }
   }, [isLike]);
 
   useEffect(() => {
-    for (let i = 0; i < likes.length; i++) {
-      if (likes[i].user_id === state.credentials?.id) {
+    if(post){
+      const checkUser = post.likes.findIndex((item)=> item.user_id === state.credentials?.id)
+      if(checkUser != -1){
         setIsLike(true);
       }
     }
-
-    
   }, [isLike]);
 
   const fetchLike = async () => {
@@ -52,12 +56,12 @@ const Likes: React.FC<propLike> = ({ likes, postId, refetch }) => {
 
         if (response.ok) {
           const responseData = await response.json();
-
-          if (refetch) {
-            refetch();
-
+          dispatch(updateLike({
+            id: postId,
+            userId: state.credentials.id
+          }))
             setIsLike(!isLike);
-          }
+          
         } else {
           console.log(response);
         }

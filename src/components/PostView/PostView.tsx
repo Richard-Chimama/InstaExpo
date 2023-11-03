@@ -17,11 +17,9 @@ const PostView = (post: postProps) => {
       <S.PostOptions>
         <S.ThreeIcons>
           <Likes
-            likes={post.item.likes}
             postId={post.item.id}
-            refetch={post.refetch}
           />
-          <Commments comments={post.item.comments} onPress={post.showModal}/>
+          <Commments postId={post.item.id} onPress={post.showModal}/>
           <IonIcons name="send-outline" size={23} />
         </S.ThreeIcons>
         <S.BookMark>
