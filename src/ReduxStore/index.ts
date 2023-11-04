@@ -1,9 +1,11 @@
 import {configureStore } from '@reduxjs/toolkit'
 import PostStore from './PostStore'
+import UserStore from './UserStore'
 
 const store = configureStore({
       reducer: {
-            posts: PostStore
+            posts: PostStore,
+            users: UserStore
       }
 })
 export type RootState = ReturnType<typeof store.getState>

@@ -49,3 +49,14 @@ export interface Likes {
   id: string,
   user_id: string
 }
+
+export interface usersProp{
+  uid: string,
+  email: string,
+  customClaims?: {
+    username: string,
+    phone_number: string,
+    address: string,
+    picture: string
+  }
+}

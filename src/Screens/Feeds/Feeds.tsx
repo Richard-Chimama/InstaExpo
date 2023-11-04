@@ -12,9 +12,10 @@ import PostView from "../../components/PostView/PostView";
 import { postProp } from "../../types";
 import SortDataByTimeCreated from "../../Utility/Functions/SortData";
 import ModalComments from "../../components/ModalComments";
+import { addUsers } from "../../ReduxStore/UserStore";
 
-const fetchPosts = async (token: string | undefined) => {
-  const response = await fetch(apiEndPoint + "post", {
+const customFetch = async (token: string | undefined, type: string) => {
+  const response = await fetch(apiEndPoint + type, {
     method: "GET",
     headers: {
       authorization: `${token}`,
@@ -43,8 +44,13 @@ const Feeds = () => {
 
   const { data, error, isPending } = useQuery({
     queryKey: ["posts"],
-    queryFn: () => fetchPosts(token),
+    queryFn: () => customFetch(token, 'post'),
   });
+
+  const {data:listOfUsers, error: usersIsError, isPending:usersIsPending} =useQuery({
+    queryKey: ["users"],
+    queryFn: ()=>customFetch(token, 'user'),
+  })
 
   useEffect(() => {
     if (!isPending && !error) {
@@ -52,10 +58,16 @@ const Feeds = () => {
     }
   }, [isPending, error]);
 
+  useEffect(()=>{
+    if(!usersIsPending && !usersIsError){
+      dispatch(addUsers(listOfUsers))
+    }
+  },[usersIsError,usersIsPending])
+
 
   const onRefresh = () => {
     setRefreshing(true);
-    fetchPosts(token)
+    customFetch(token, 'post')
       .then((data) => {
         dispatch(addPosts(SortDataByTimeCreated({data:data})));
         setRefreshing(false);

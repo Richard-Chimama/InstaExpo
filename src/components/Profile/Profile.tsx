@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { View, Image } from "react-native";
+import { View, Image, Text } from "react-native";
 import { useAppContext, apiEndPoint } from "../../auth";
+import { useSelector } from "react-redux";
+import { RootState } from "../../ReduxStore";
+import { usersProp } from "../../types";
 
 const Profile = () => {
   const { state } = useAppContext();
-  const [data, setUserData] = useState<any>(null);
+  const [data, setUserData] = useState<usersProp>();
 
   useEffect(() => {
     const user = async () => {
@@ -27,44 +30,45 @@ const Profile = () => {
         console.log(error);
       }
     };
-
     user();
   }, []);
 
   let pictureUrl;
   if (data) {
     pictureUrl =
-      data.customClaims.picture == undefined ? "" : data.customClaims.picture;
+      data.customClaims?.picture == undefined ? "" : data.customClaims.picture;
   }
 
   return (
-    <View style={{
-      borderColor: 'black',
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderRadius: 50,
-    }}>
-      {data ? (
-        <Image
-          source={{ uri: pictureUrl }}
-          alt="user profile"
-          resizeMode="contain"
-          style={{
-            height:40,
-            width: 40,
-            borderRadius: 50
-          }}
-        />
-      ):
-      <View
+    <View
       style={{
-            height: 40,
-            width: 40,
-            borderRadius: 50,
-            backgroundColor: 'white'
+        borderColor: "black",
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderRadius: 50,
       }}
-      ></View>
-      }
+    >
+      {data ? (
+          <Image
+            source={{ uri: pictureUrl }}
+            alt="user profile"
+            resizeMode="contain"
+            style={{
+              height: 40,
+              width: 40,
+              borderRadius: 50,
+            }}
+          />
+      ) : (
+        <View
+          style={{
+            height: 42,
+            width: 42,
+            borderRadius: 50,
+            backgroundColor: "lightgreen",
+          }}
+        ></View>
+      )}
     </View>
   );
 };

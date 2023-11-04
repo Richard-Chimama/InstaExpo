@@ -13,11 +13,20 @@ function formatTimestamp(time:Date) {
       }
       // If the date is from the last 7 days, show the days
       else if (diffInDays < 7) {
-        return diffInDays + ' days ago';
+        if(diffInDays < 2){
+          return diffInDays + ' day ago'
+        }else{
+          return diffInDays + ' days ago';
+        }
       }
       // If the date is older, show the weeks
       else {
-        return diffInWeeks + ' weeks ago';
+        if(diffInWeeks < 2){
+          return diffInWeeks + ' week ago'
+        }else{
+          return diffInWeeks + ' weeks ago';
+        }
+        
       }
     }
 

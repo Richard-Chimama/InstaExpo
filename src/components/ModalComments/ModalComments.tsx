@@ -6,6 +6,8 @@ import Profile from "../Profile";
 import { apiEndPoint, useAppContext } from "../../auth";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../ReduxStore";
+import CommentAvatar from "./CommentAvatar";
+import formatTimestamp from "../../Utility/Functions/FormatTimeStamp";
 
 interface props {
   showModal: () => void;
@@ -81,13 +83,20 @@ const ModalComments = (props: props) => {
               {
                 post.comment.map((item:commentProp) => <S.CommentsSection key={item.id}>
                     <S.CommentHeader>
-                      <S.commenttext>I here I am!{post.comment.length}</S.commenttext>
+                      <S.CommentAvatar>
+                        <CommentAvatar userId={item.user_id} />
+                      </S.CommentAvatar>
+                      <S.CommentTime>{formatTimestamp(item.created_at)}</S.CommentTime>
                     </S.CommentHeader>
+                    <S.CommentBody>
+                      <S.commenttext>{item.comment}</S.commenttext>
+                    </S.CommentBody>
                 </S.CommentsSection>)
               }
               </>
             ):(
               <S.NoComment>
+                
                 <S.NoCommentText>
                   No comments yet! Be the first to comment!
                 </S.NoCommentText>

@@ -53,6 +53,7 @@ export const HeaderSection = styled.View`
       align-items: center;
       height: 30px;
       width: 100%;
+      margin-bottom: 10px;
 `
 export const HeaderText = styled.Text`
       font-size: 16px;
@@ -68,8 +69,28 @@ export const NoCommentText = styled.Text`
       font-size: 13px;
 `
 export const CommentsSection = styled.View`
-
+      padding: 10px;
+      background-color: lightgrey;
+      margin-bottom: 5px;
+      border-radius: 8px;
 `
-export const CommentHeader = styled.View``
-export const CommentBody = styled.View``
+export const CommentHeader = styled.View`
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+`
+export const CommentBody = styled.View`
+      margin-left: 65px;
+      margin-top: -22px;
+`
 export const commenttext = styled.Text``
+export const CommentTime = styled.Text`
+      font-size: 13px;
+      font-style: italic;
+`
+export const CommentAvatar = styled.View`
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      background-color: white;
+`
