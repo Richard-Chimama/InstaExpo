@@ -1,5 +1,7 @@
 import React from "react";
 import * as S from "./styled";
+import {useSelector} from 'react-redux'
+import { RootState } from "../../ReduxStore";
 
 interface props {
   width?: string;
@@ -7,7 +9,8 @@ interface props {
 }
 
 const Spacer: React.FC<props> = ({ width, height }) => {
-  return <S.Container width={width} height={height}></S.Container>;
+  const theme = useSelector((state:RootState)=> state.theme)
+  return <S.Container mode={theme.isDark} width={width} height={height}></S.Container>;
 };
 
 export default Spacer;

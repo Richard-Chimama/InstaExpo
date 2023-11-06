@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import Feed from './Feed';
+import Feed from './App';
 
 
 const Stack = createStackNavigator();

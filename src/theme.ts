@@ -1,4 +1,4 @@
-const darkBackground = "#121212"; //#1a1a1a
+const darkBackground = "#264653"; //#1a1a1a, 121212
 const darkTextColor = "#FFFFFF"; //#CCCCCC
 const accentColor = "#007acc"; //#4CAF50
 const secondaryColor = "#FFD54F"; //#E573737

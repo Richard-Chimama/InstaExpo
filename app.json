@@ -39,7 +39,12 @@
             "flipper": true
           }
         }
-      ]
+      ],
+      ["expo-camera",
+      {
+        "cameraPermissions": "Allow InstaClone to access your camera."
+      }
+    ]
     ]
   }
 }
