@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, RefreshControl, Modal } from "react-native";
+import { View, Text, RefreshControl, Modal, ActivityIndicator } from "react-native";
 import { useAppContext, apiEndPoint } from "../../auth";
 import { useQuery } from "@tanstack/react-query";
 import { FlashList } from "@shopify/flash-list";
@@ -32,14 +32,17 @@ const customFetch = async (token: string | undefined, type: string) => {
 const Feeds = () => {
   const {
     state: { credentials },
+    dispatch: tokenDispatch
   } = useAppContext();
   const token = credentials?.token;
   const [refreshing, setRefreshing] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalData, setModalData] = useState('');
-
+  
   const dispatch = useDispatch();
   const posts = useSelector((state:RootState)=> state.posts)
+  const theme = useSelector((state:RootState)=> state.theme)
+  const [mode, setMode] = useState<boolean>(theme.isDark)
   
 
   const { data, error, isPending } = useQuery({
@@ -64,6 +67,10 @@ const Feeds = () => {
     }
   },[usersIsError,usersIsPending])
 
+  useEffect(()=>{
+    setMode(theme.isDark)
+  },[theme.isDark])
+
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -87,8 +94,8 @@ const Feeds = () => {
 
 
   return (
-    <S.Container style={{ flex: 1 }}>
-      {isPending && <Text>Loading...</Text>}
+    <S.Container mode={mode}>
+      {isPending && <ActivityIndicator size='large' />}
       {error && <Text>An Error happened!!!</Text>}
       {!isPending && !error && posts && (
         <FlashList

@@ -5,9 +5,6 @@ import { useAppContext } from "./auth";
 import RouteAuth from "./RouteAuth";
 import RouteApp from "./RouteApp";
 
-import { Provider } from "react-redux";
-import store from "./ReduxStore";
-
 const queryClient = new QueryClient();
 
 const Main = () => {
@@ -19,13 +16,12 @@ const Main = () => {
       return <RouteAuth />;
     }
   };
+
   return (
     <NavigationContainer>
-      <Provider store={store}>
         <QueryClientProvider client={queryClient}>
           {handleAuthenticate()}
         </QueryClientProvider>
-      </Provider>
     </NavigationContainer>
   );
 };

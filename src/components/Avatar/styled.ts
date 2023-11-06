@@ -11,7 +11,7 @@ export const UserImage = styled.Image`
 `;
 export const ImageContainer = styled.View`
   border-radius: 50%;
-  border: 2px solid rgba(100, 100, 100, 0.5);
+  border: 2px solid rgba(100, 100, 100, 0.7);
 `;
 
 export const Content = styled.View`

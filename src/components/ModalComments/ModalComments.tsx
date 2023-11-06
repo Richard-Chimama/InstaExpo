@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import IonIcons from "@expo/vector-icons/Ionicons";
 import * as S from "./styled";
 import { commentProp, postProp } from "../../types";
@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../ReduxStore";
 import CommentAvatar from "./CommentAvatar";
 import formatTimestamp from "../../Utility/Functions/FormatTimeStamp";
+import { updateComment } from "../../ReduxStore/PostStore";
+import {ScrollView, KeyboardAvoidingView, Platform} from 'react-native'
 
 interface props {
   showModal: () => void;
@@ -18,18 +20,13 @@ const ModalComments = (props: props) => {
   const [inputValue, setInputValue] = useState<string>("");
   const {state} = useAppContext()
   const posts = useSelector((state:RootState)=>state.posts)
+  const dispatch = useDispatch()
+  const scrollViewRef:React.MutableRefObject<any> = useRef()
 
   const post = posts.value.find((item)=> item.id === props.postId)
 
   const handleSubmit = ()=>{
-    if(state.credentials){
-      const data = {
-        id: state.credentials.id,
-        comment: inputValue
-  }
-  console.log(JSON.stringify(data));
   sendComment()
-    }
   }
   const sendComment = async()=>{
    
@@ -49,16 +46,22 @@ const ModalComments = (props: props) => {
 
       if(res.ok){
         const com = await res.json()
-        console.log(com)
+        dispatch(updateComment({
+          postId: props.postId,
+          comments: com.comment}))
+          setInputValue('')
       }else{
         console.log('something went wrong!!!')
-        console.log(res)
       }
 
     }
   }
 
   return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS ==='ios' ? "padding" : "height"}
+      style={{flex:1}}
+    >
     <S.Container
       transparent={true}
       animationType="slide"
@@ -67,7 +70,9 @@ const ModalComments = (props: props) => {
     >
       <S.Content>
         <S.TouchableLayer onPress={props.showModal} />
-        <S.SubContent>
+        <S.SubContent
+          behavior={Platform.OS ==='ios' ? "padding" : "height"}
+        >
           <S.HeaderSection
             style={{
               borderBottomWidth: 1,
@@ -78,6 +83,9 @@ const ModalComments = (props: props) => {
             <S.HeaderText>Comments</S.HeaderText>
           </S.HeaderSection>
           <S.CommentSection>
+            <ScrollView ref={scrollViewRef} onContentSizeChange={()=>{
+              scrollViewRef?.current?.scrollToEnd({ animated: true})
+            }}>
             {(post && post.comment )? (
               <>
               {
@@ -103,6 +111,7 @@ const ModalComments = (props: props) => {
               </S.NoComment>
               
             )}
+            </ScrollView>
           </S.CommentSection>
           <S.InputSection>
             <Profile />
@@ -117,6 +126,7 @@ const ModalComments = (props: props) => {
         </S.SubContent>
       </S.Content>
     </S.Container>
+    </KeyboardAvoidingView>
   );
 };
 

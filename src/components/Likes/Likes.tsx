@@ -14,6 +14,7 @@ interface propLike {
 const Likes: React.FC<propLike> = ({ postId }) => {
   const { state } = useAppContext();
   const posts = useSelector((state:RootState)=> state.posts)
+  const Theme = useSelector((state:RootState)=> state.theme)
   const dispatch = useDispatch()
   const [numLikes, setNumLikes] = useState(0);
   const [isLike, setIsLike] = useState(false);
@@ -73,7 +74,7 @@ const Likes: React.FC<propLike> = ({ postId }) => {
 
   return (
     <S.Container onPress={() => fetchLike()}>
-      <S.Info>{numLikes > 0 && numLikes}</S.Info>
+      <S.Info mode={Theme.isDark}>{numLikes > 0 && numLikes}</S.Info>
       {isLike ? (
         <IonIcons name="heart" color="red" size={25} />
       ) : (

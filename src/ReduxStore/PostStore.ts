@@ -25,7 +25,13 @@ const postSlice = createSlice({
         }
       }
     },
-    updateComment: (state, action) => {},
+    updateComment: (state, action) => {
+      const post = state.value.find((item)=> item.id === action.payload.postId)
+      if(post){
+        let newComments = [...action.payload.comments]
+        post.comment = newComments
+      }
+    },
   },
 });
 

@@ -14,8 +14,8 @@ export const TouchableLayer = styled.TouchableOpacity`
 
 export const SubContent = styled.KeyboardAvoidingView`
       position:relative;
-      height: 70%;
       background-color: white;
+      height: 80%;
       opacity: 0.88;
       border-top-left-radius: 25px;
       border-top-right-radius: 25px;
@@ -25,18 +25,21 @@ export const SubContent = styled.KeyboardAvoidingView`
 `
 
 export const CommentSection = styled.View`
-      height: 79%;
+      height: 78%;
+      overflow: scroll;
 `
 
 export const InputSection = styled.View`
-      position: absolute;
+      position: relative;
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 10px;
-      bottom: 40px;
       left: 10px;
       right: 10px;
+      z-index: 999;
+      background-color: white;
+      padding-top: 8px;
 
 `
 export const TextInput = styled.TextInput`

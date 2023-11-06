@@ -1,4 +1,6 @@
+import { ReactNode } from "react";
 import { styled } from "styled-components/native";
+import theme from "../../theme";
 
 export const Container = styled.TouchableOpacity`
       display: flex;
@@ -7,7 +9,13 @@ export const Container = styled.TouchableOpacity`
       gap: 5px;
 `
 
-export const Info = styled.Text`
+type InfoProps ={
+      mode: boolean,
+      children?: ReactNode
+}
+
+export const Info = styled.Text<InfoProps>`
       font-size: 20px;
+      color: ${(props)=> props.mode ? theme.darkTextColor: theme.lightTextColor}
 
 `
