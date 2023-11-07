@@ -1,3 +1,3 @@
-import Commments from "./Commments";
+import Commments from './Commments';
 
-export default Commments
+export default Commments;

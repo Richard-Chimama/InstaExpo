@@ -1,3 +1,3 @@
-import CreatePostScreen from "./CreatePostScreen";
+import CreatePostScreen from './CreatePostScreen';
 
-export default CreatePostScreen
+export default CreatePostScreen;

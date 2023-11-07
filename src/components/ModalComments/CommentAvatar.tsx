@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Image } from "react-native";
-import { useSelector } from "react-redux";
-import { RootState } from "../../ReduxStore";
-import { usersProp } from "../../types";
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../ReduxStore';
+import { usersProp } from '../../types';
 
 interface prop {
   userId?: string;
@@ -25,11 +25,11 @@ const CommentAvatar: React.FC<prop> = ({ userId }) => {
   let pictureUrl;
   if (data) {
     pictureUrl =
-      data.customClaims?.picture == undefined ? "" : data.customClaims.picture;
+      data.customClaims?.picture == undefined ? '' : data.customClaims.picture;
   }
 
   return (
-    <View style={{flexDirection:'row', gap:10}}>
+    <View style={{ flexDirection: 'row', gap: 10 }}>
       <Image
         source={{ uri: pictureUrl }}
         alt="user profile"
@@ -40,7 +40,9 @@ const CommentAvatar: React.FC<prop> = ({ userId }) => {
           borderRadius: 50,
         }}
       />
-      <Text style={{fontSize: 17, fontWeight: 'bold'}}>{data?.customClaims?.username}</Text>
+      <Text style={{ fontSize: 17, fontWeight: 'bold' }}>
+        {data?.customClaims?.username}
+      </Text>
     </View>
   );
 };

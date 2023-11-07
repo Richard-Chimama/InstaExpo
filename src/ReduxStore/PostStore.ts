@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { postProp } from "../types";
+import { createSlice } from '@reduxjs/toolkit';
+import { postProp } from '../types';
 
 const postSlice = createSlice({
-  name: "posts",
+  name: 'posts',
   initialState: {
     value: [] as postProp[],
   },
@@ -10,11 +10,15 @@ const postSlice = createSlice({
     addPosts: (state, action) => {
       state.value = [...action.payload];
     },
-    addPost: (state, action) => {},
+    addPost: (state, action) => {
+      console.log({ state, action });
+    },
     updateLike: (state, action) => {
       const post = state.value.find((item) => item.id === action.payload.id);
       if (post) {
-        const existingLikeIndex = post.likes.findIndex((like) => like.user_id === action.payload.userId);
+        const existingLikeIndex = post.likes.findIndex(
+          (like) => like.user_id === action.payload.userId,
+        );
         if (existingLikeIndex !== -1) {
           post.likes.splice(existingLikeIndex, 1);
         } else {
@@ -26,10 +30,12 @@ const postSlice = createSlice({
       }
     },
     updateComment: (state, action) => {
-      const post = state.value.find((item)=> item.id === action.payload.postId)
-      if(post){
-        let newComments = [...action.payload.comments]
-        post.comment = newComments
+      const post = state.value.find(
+        (item) => item.id === action.payload.postId,
+      );
+      if (post) {
+        const newComments = [...action.payload.comments];
+        post.comment = newComments;
       }
     },
   },

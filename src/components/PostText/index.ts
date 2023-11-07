@@ -1,3 +1,3 @@
-import PostText from "./PostText";
+import PostText from './PostText';
 
-export default PostText
+export default PostText;

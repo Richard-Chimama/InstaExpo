@@ -1,3 +1,3 @@
-import PostView from "./PostView";
+import PostView from './PostView';
 
-export default PostView
+export default PostView;

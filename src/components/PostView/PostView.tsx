@@ -1,15 +1,15 @@
-import React from "react";
-import { postProps } from "../../types";
-import IonIcons from "@expo/vector-icons/Ionicons";
-import * as S from "./styled";
-import Avatar from "../Avatar";
-import PostText from "../PostText";
-import Likes from "../Likes";
-import Spacer from "../Spacer";
-import Commments from "../Comments";
-import { useSelector } from "react-redux";
-import { RootState } from "../../ReduxStore";
-import Theme from "../../theme";
+import React from 'react';
+import { postProps } from '../../types';
+import IonIcons from '@expo/vector-icons/Ionicons';
+import * as S from './styled';
+import Avatar from '../Avatar';
+import PostText from '../PostText';
+import Likes from '../Likes';
+import Spacer from '../Spacer';
+import Commments from '../Comments';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../ReduxStore';
+import Theme from '../../theme';
 
 const PostView = (post: postProps) => {
   const theme = useSelector((state: RootState) => state.theme);
@@ -29,8 +29,11 @@ const PostView = (post: postProps) => {
           />
         </S.ThreeIcons>
         <S.BookMark>
-          <IonIcons name="bookmark-outline"             color={theme.isDark ? Theme.darkTextColor : Theme.lightTextColor}
- size={23} />
+          <IonIcons
+            name="bookmark-outline"
+            color={theme.isDark ? Theme.darkTextColor : Theme.lightTextColor}
+            size={23}
+          />
         </S.BookMark>
       </S.PostOptions>
       <Spacer />

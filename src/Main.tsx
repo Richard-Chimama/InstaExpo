@@ -1,9 +1,9 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useAppContext } from "./auth";
-import RouteAuth from "./RouteAuth";
-import RouteApp from "./RouteApp";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useAppContext } from './auth';
+import RouteAuth from './RouteAuth';
+import RouteApp from './RouteApp';
 
 const queryClient = new QueryClient();
 
@@ -19,9 +19,9 @@ const Main = () => {
 
   return (
     <NavigationContainer>
-        <QueryClientProvider client={queryClient}>
-          {handleAuthenticate()}
-        </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        {handleAuthenticate()}
+      </QueryClientProvider>
     </NavigationContainer>
   );
 };

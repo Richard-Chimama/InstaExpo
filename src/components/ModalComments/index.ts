@@ -1,3 +1,3 @@
-import ModalComments from "./ModalComments";
+import ModalComments from './ModalComments';
 
-export default ModalComments
+export default ModalComments;

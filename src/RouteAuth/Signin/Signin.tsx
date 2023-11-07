@@ -1,51 +1,52 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   TouchableOpacity,
   KeyboardAvoidingView,
   Text,
-} from "react-native";
-import { useAppContext, apiEndPoint } from "../../auth";
-import * as S from "./styled";
+} from 'react-native';
+import { useAppContext, apiEndPoint } from '../../auth';
+import * as S from './styled';
 const Signin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState<any>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string>();
 
-  const {dispatch} = useAppContext()
+  const { dispatch } = useAppContext();
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     if (email.length > 0) {
-
-      try{
-        const response = await fetch(apiEndPoint + 'user/signin',{
+      try {
+        const response = await fetch(apiEndPoint + 'user/signin', {
           method: 'POST',
-          body: JSON.stringify({email: email, password: password}),
-          headers:{
-            'Content-Type': 'application/json'
-          }
-        })
-        if(response.ok){
-          let res = await response.json()
-          if(res.token && res.id){
-            dispatch({type:'LOGIN', payload:{
-              token: res.token,
-              id: res.id
-            }})
-          }else{
-            throw new Error('invalid credentials!')
+          body: JSON.stringify({ email: email, password: password }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          const res = await response.json();
+          if (res.token && res.id) {
+            dispatch({
+              type: 'LOGIN',
+              payload: {
+                token: res.token,
+                id: res.id,
+              },
+            });
+          } else {
+            throw new Error('invalid credentials!');
           }
         }
-      }catch(error){
-        setError('Invalid credential!')
-        console.log(error)
+      } catch (error) {
+        setError('Invalid credential!');
+        console.log(error);
       }
-     
 
       console.log(email);
       console.log(password);
     } else {
-      setError("Invalid email address!");
+      setError('Invalid email address!');
     }
   };
 
@@ -53,26 +54,26 @@ const Signin = () => {
     <KeyboardAvoidingView>
       <View
         style={{
-          backgroundColor: "skyblue",
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
+          backgroundColor: 'skyblue',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
         <View
           style={{
-            width: "100%",
-            height: "100%",
-            backgroundColor: "white",
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
             flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           {error && (
             <View style={{ marginBottom: 5 }}>
-              <Text style={{ color: "red" }}>{error}</Text>
+              <Text style={{ color: 'red' }}>{error}</Text>
             </View>
           )}
           <S.InputContainer>
@@ -81,7 +82,7 @@ const Signin = () => {
               keyboardType="email-address"
               underlineColorAndroid="transparent"
               onChangeText={(email) => setEmail(email.toLowerCase().trim())}
-              onFocus={()=> setError(null)}
+              onFocus={() => setError(undefined)}
             />
           </S.InputContainer>
           <S.InputContainer>
@@ -90,12 +91,12 @@ const Signin = () => {
               secureTextEntry={true}
               underlineColorAndroid="transparent"
               onChangeText={(password) => setPassword(password)}
-              onFocus={()=> setError(null)}
+              onFocus={() => setError(undefined)}
               clearTextOnFocus
             />
           </S.InputContainer>
 
-          <TouchableOpacity style={{ alignSelf: "center", width: "70%" }}>
+          <TouchableOpacity style={{ alignSelf: 'center', width: '70%' }}>
             <S.ForgotPassword>Forgot your password?</S.ForgotPassword>
           </TouchableOpacity>
 

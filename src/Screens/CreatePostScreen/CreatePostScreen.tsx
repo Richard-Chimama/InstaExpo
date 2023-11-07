@@ -1,35 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, Button, TextInput, StyleSheet } from 'react-native';
-import {Camera, CameraType } from 'expo-camera'
-
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, Button, StyleSheet } from 'react-native';
+import { Camera, CameraType } from 'expo-camera';
 
 const CreatePostScreen = () => {
-      const [type, setType] = useState(CameraType.back)
-      const [permission, requestPermission] = Camera.useCameraPermissions()
-
+  const [type, setType] = useState(CameraType.back);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
 
   if (!permission) {
-      // Camera permissions are still loading
-      return <View />;
-    }
-  
-    if (!permission.granted) {
-      // Camera permissions are not granted yet
-      return (
-        <View style={styles.container}>
-          <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
-          <Button onPress={requestPermission} title="grant permission" />
-        </View>
-      );
-    }
+    // Camera permissions are still loading
+    return <View />;
+  }
 
-function toggleCameraType(){
-      setType(current => (current === CameraType.back? CameraType.front: CameraType.back))
-}
+  if (!permission.granted) {
+    // Camera permissions are not granted yet
+    return (
+      <View style={styles.container}>
+        <Text style={{ textAlign: 'center' }}>
+          We need your permission to show the camera
+        </Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
+  }
 
+  function toggleCameraType() {
+    setType((current) =>
+      current === CameraType.back ? CameraType.front : CameraType.back,
+    );
+  }
 
   return (
-      <View style={styles.container}>
+    <View style={styles.container}>
       <Camera style={styles.camera} type={type}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>

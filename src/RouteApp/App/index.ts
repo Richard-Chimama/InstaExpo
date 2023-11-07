@@ -1,3 +1,3 @@
-import Feed from "./App";
+import Feed from './App';
 
 export default Feed;
