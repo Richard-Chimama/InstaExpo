@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View,
   Text,
   RefreshControl,
-  Modal,
   ActivityIndicator,
 } from 'react-native';
-import { useAppContext, apiEndPoint } from '../../auth';
+import { useAppContext, apiEndPoint } from '@auth';
 import { useQuery } from '@tanstack/react-query';
 import { FlashList } from '@shopify/flash-list';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPosts } from '../../ReduxStore/PostStore';
-import { RootState } from '../../ReduxStore';
+import { addPosts } from '@reduxStore/PostStore';
+import { RootState } from '@reduxStore/index';
 
 import * as S from './styled';
-import PostView from '../../components/PostView/PostView';
-import { postProp } from '../../types';
-import SortDataByTimeCreated from '../../Utility/Functions/SortData';
-import ModalComments from '../../components/ModalComments';
-import { addUsers } from '../../ReduxStore/UserStore';
+import PostView from '@components/PostView/PostView';
+import { postProp } from '@types';
+import SortDataByTimeCreated from '@utility/Functions/SortData';
+import ModalComments from '@components/ModalComments';
+import { addUsers } from '@reduxStore/UserStore';
 
 const customFetch = async (token: string | undefined, type: string) => {
   const response = await fetch(apiEndPoint + type, {
@@ -38,7 +36,6 @@ const customFetch = async (token: string | undefined, type: string) => {
 const Feeds = () => {
   const {
     state: { credentials },
-    dispatch: tokenDispatch,
   } = useAppContext();
   const token = credentials?.token;
   const [refreshing, setRefreshing] = useState(false);

@@ -5,9 +5,9 @@ import React, {
   useEffect,
   ReactNode,
 } from 'react';
-import { AppContextProps, CredentialAction, CredentialState } from '../types';
+import { AppContextProps, CredentialAction, CredentialState } from '@types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import LoadingComponent from '../components/LoadingComponent';
+import LoadingComponent from '@components/LoadingComponent';
 
 // Initial state
 const initialState: CredentialState = {

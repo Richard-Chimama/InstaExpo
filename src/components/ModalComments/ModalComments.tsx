@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import IonIcons from '@expo/vector-icons/Ionicons';
 import * as S from './styled';
-import { commentProp, postProp } from '../../types';
-import Profile from '../Profile';
-import { apiEndPoint, useAppContext } from '../../auth';
+import { commentProp } from '@types';
+import Profile from '@components/Profile';
+import { apiEndPoint, useAppContext } from '@auth';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../ReduxStore';
+import { RootState } from '@reduxStore/index';
 import CommentAvatar from './CommentAvatar';
-import formatTimestamp from '../../Utility/Functions/FormatTimeStamp';
-import { updateComment } from '../../ReduxStore/PostStore';
+import {FormatTimeStamp} from '@utility/Functions';
+import { updateComment } from '@reduxStore/PostStore';
 import { ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 
 interface props {
@@ -97,7 +97,7 @@ const ModalComments = (props: props) => {
                             <CommentAvatar userId={item.user_id} />
                           </S.CommentAvatar>
                           <S.CommentTime>
-                            {formatTimestamp(item.created_at)}
+                            {FormatTimeStamp(item.created_at)}
                           </S.CommentTime>
                         </S.CommentHeader>
                         <S.CommentBody>

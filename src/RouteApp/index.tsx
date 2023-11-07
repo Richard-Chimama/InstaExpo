@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import Feed from './App';
+import App from './App';
 
 const Stack = createStackNavigator();
 
@@ -8,7 +8,7 @@ const RouteApp = () => {
     <Stack.Navigator>
       <Stack.Screen
         name="Signin"
-        component={Feed}
+        component={App}
         options={{
           headerShown: false,
         }}

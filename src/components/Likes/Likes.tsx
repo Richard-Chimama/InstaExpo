@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import IonIcons from '@expo/vector-icons/Ionicons';
 import * as S from './styled';
-import { apiEndPoint, useAppContext } from '../../auth';
+import { apiEndPoint, useAppContext } from '@auth';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../ReduxStore';
-import { updateLike } from '../../ReduxStore/PostStore';
+import { RootState } from '@reduxStore/index';
+import { updateLike } from '@reduxStore/PostStore';
 
 interface propLike {
   postId: string;

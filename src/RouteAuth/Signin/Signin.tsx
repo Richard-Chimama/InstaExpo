@@ -5,7 +5,7 @@ import {
   KeyboardAvoidingView,
   Text,
 } from 'react-native';
-import { useAppContext, apiEndPoint } from '../../auth';
+import { useAppContext, apiEndPoint } from '@auth';
 import * as S from './styled';
 const Signin = () => {
   const [email, setEmail] = useState('');

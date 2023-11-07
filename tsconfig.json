@@ -12,6 +12,16 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
+    "paths":{
+      "@auth":["./src/auth/"],
+      "@components/*": ["./src/components/*"],
+      "@reduxStore/*":["./src/ReduxStore/*"],
+      "@Screens":["./src/Screens/"],
+      "@theme":["./src/theme.ts"],
+      "@types": ["./src/types.ts"],
+      "@utility/*": ["./src/Utility/*"],
+      "@app": ["./src/RouteApp"],
+    }
   },
   "extends": "expo/tsconfig.base",
   "include": [

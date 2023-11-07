@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image, Text } from 'react-native';
-import { useAppContext, apiEndPoint } from '../../auth';
+import { useAppContext, apiEndPoint } from '@auth';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../ReduxStore';
-import { usersProp } from '../../types';
+import { RootState } from '@reduxStore/index';
+import { usersProp } from '@types';
 
 const Profile = () => {
   const { state } = useAppContext();

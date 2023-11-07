@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
-import { useAppContext } from '../../auth';
+import { useAppContext } from '@auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleTheme } from '../../ReduxStore/Theme';
-import { RootState } from '../../ReduxStore';
+import { toggleTheme } from '@reduxStore/Theme';
+import { RootState } from '@reduxStore/index';
 
 const Logout = () => {
   const { dispatch } = useAppContext();

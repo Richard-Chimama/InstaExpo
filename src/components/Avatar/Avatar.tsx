@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image } from 'react-native';
-import { apiEndPoint, useAppContext } from '../../auth';
-import formatTimestamp from '../../Utility/Functions/FormatTimeStamp';
+import { apiEndPoint, useAppContext } from '@auth';
+import {FormatTimeStamp} from '@utility/Functions/';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import * as S from './styled';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../ReduxStore';
-import Theme from '../../theme';
+import { RootState } from '@reduxStore';
+import Theme from '@theme';
 
 interface prop {
   id: string;
@@ -85,7 +85,7 @@ const Avatar: React.FC<prop> = ({ id, time }) => {
                     : Theme.lightTextColor,
                 }}
               >
-                {formatTimestamp(time)}
+                {FormatTimeStamp(time)}
               </Text>
             </View>
           </S.UserInfo>
