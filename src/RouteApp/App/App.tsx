@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import IonIcons from '@expo/vector-icons/Ionicons';
 import * as S from './styled';
@@ -30,11 +30,7 @@ const Feed = () => {
               let iconName: IconName = IconName.Home;
               if (route.name == 'Feed') {
                 iconName = focused ? IconName.Home : IconName.HomeOutline;
-              } else if (route.name === 'Feed2') {
-                iconName = focused
-                  ? IconName.InformationCircle
-                  : IconName.InformationCircleOutline;
-              } else if (route.name === 'Feed3') {
+              } else if (route.name === 'Post') {
                 iconName = focused
                   ? IconName.InformationCircle
                   : IconName.InformationCircleOutline;
@@ -49,8 +45,7 @@ const Feed = () => {
           })}
         >
           <Drawer.Screen name="Feed" component={Screens.Feeds} />
-          <Drawer.Screen name="Feed2" component={Screens.Feeds} />
-          <Drawer.Screen name="Feed3" component={Screens.Feeds} />
+          <Drawer.Screen name="Post" component={Screens.CreatePost} />
           <Drawer.Screen name="Logout" component={Screens.Logout} />
         </Drawer.Navigator>
       );
@@ -58,6 +53,7 @@ const Feed = () => {
       return (
         <Tab.Navigator
           initialRouteName="Feed"
+
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
               let iconName: IconName = IconName.Home;
@@ -88,12 +84,14 @@ const Feed = () => {
               bottom: -35,
               height: 80,
               backgroundColor: '#2A9D8F',
-              color: 'red',
             },
+            tabBarHideOnKeyboard: true,
           })}
         >
           <Tab.Screen name="Feed" component={Screens.Feeds} />
-          <Tab.Screen name="Post" component={Screens.CreatePost} />
+          <Tab.Screen name="Post" component={Screens.CreatePost} options={{
+            tabBarStyle:{display:'none'}
+          }}/>
           <Tab.Screen name="Logout" component={Screens.Logout} />
         </Tab.Navigator>
       );
@@ -103,9 +101,9 @@ const Feed = () => {
   return (
     <S.Container>
       <StatusBar
-        style={'dark'}
+        style={'auto'}
         hidden={Platform.OS === 'android' ? true : false}
-        backgroundColor="black"
+        backgroundColor="white"
       />
       {handlePlatform()}
     </S.Container>

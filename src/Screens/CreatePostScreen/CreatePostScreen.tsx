@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Button, StyleSheet } from 'react-native';
 import { Camera, CameraType } from 'expo-camera';
+import { useNavigation } from '@react-navigation/native';
 
 const CreatePostScreen = () => {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
+  const navigation = useNavigation()
 
   if (!permission) {
     // Camera permissions are still loading
@@ -29,9 +31,18 @@ const CreatePostScreen = () => {
     );
   }
 
+  function handleCloseCameraScreem(){
+    navigation.goBack()
+  }
+
   return (
     <View style={styles.container}>
       <Camera style={styles.camera} type={type}>
+      <View style={styles.topContainer}>
+          <TouchableOpacity style={styles.top} onPress={handleCloseCameraScreem}>
+            <Text style={styles.text}>Close camera</Text>
+          </TouchableOpacity>
+        </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <Text style={styles.text}>Flip Camera</Text>
@@ -58,9 +69,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     margin: 64,
   },
+  topContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+    margin: 64,
+  },
   button: {
     flex: 1,
     alignSelf: 'flex-end',
+    alignItems: 'center',
+  },
+  top:{
+    flex: 1,
+    alignSelf: 'flex-start',
     alignItems: 'center',
   },
   text: {

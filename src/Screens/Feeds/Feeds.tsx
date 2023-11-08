@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Text,
-  RefreshControl,
-  ActivityIndicator,
-} from 'react-native';
+import { Text, RefreshControl, ActivityIndicator } from 'react-native';
 import { useAppContext, apiEndPoint } from '@auth';
 import { useQuery } from '@tanstack/react-query';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FlashList } from '@shopify/flash-list';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPosts } from '@reduxStore/PostStore';
@@ -17,6 +14,7 @@ import { postProp } from '@types';
 import SortDataByTimeCreated from '@utility/Functions/SortData';
 import ModalComments from '@components/ModalComments';
 import { addUsers } from '@reduxStore/UserStore';
+import ThemeStyle from '@theme';
 
 const customFetch = async (token: string | undefined, type: string) => {
   const response = await fetch(apiEndPoint + type, {
@@ -45,6 +43,7 @@ const Feeds = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state: RootState) => state.posts);
   const theme = useSelector((state: RootState) => state.theme);
+  const insets = useSafeAreaInsets();
   const [mode, setMode] = useState<boolean>(theme.isDark);
 
   const { data, error, isPending } = useQuery({
@@ -97,8 +96,13 @@ const Feeds = () => {
   };
 
   return (
-    <S.Container mode={mode}>
-      {isPending && <ActivityIndicator size="large" />}
+    <S.Container insets={insets} mode={mode}>
+      {isPending && (
+        <ActivityIndicator
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+          size="large"
+        />
+      )}
       {error && <Text>An Error happened!!!</Text>}
       {!isPending && !error && posts && (
         <FlashList
@@ -114,7 +118,7 @@ const Feeds = () => {
           estimatedItemSize={200}
           keyExtractor={(item) => item.id}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            <RefreshControl style={{backgroundColor:'#2A9D8F'}} refreshing={refreshing} onRefresh={onRefresh} />
           }
         />
       )}
